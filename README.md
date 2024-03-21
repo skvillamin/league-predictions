@@ -13,7 +13,7 @@ Our dataset is on the game statistics of 2022 professional League of Legends gam
 
 Although every role plays an integral part in a game's success, the overall deciding factor is the ability of the high-damage output heroes to out-damage the opponents. With differing opinions on the star of the team, fellow League of Legends players may be interested in putting a conclusion to this community debate. 
 
-The columns that help us answer, **"Which role carries more often: Mid or ADC?"** are: `position`, `kills`, `total damage dealt`, `result`, and `first blood kill`. As doing as much damage is important for these roles, these columns showed us: Based on the game result, who ended up doing the most amount of damage. After cleaning the data, 
+The columns that help us answer, **"Which role carries more often: Mid or ADC?"** are: `position`, `kills`, `total damage dealt`, `result`, and `first blood kill`. As doing as much damage is important for these roles, these columns showed us: Based on the game result, who ended up doing the most amount of damage. After cleaning the data, we narrowed it to 12 columns and 144804 rows that will be needed for both our analysis and predictive modeling.
 
 ### Analysis Column Descriptions
 
@@ -32,6 +32,19 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 | `'exp at 10'` | The experience level gained by a player at minute-10|
 | `'result'` | Whether or not the team won that game |
 
+
+
+
+---
+
+## Cleaning and Exploratory Data Analysis
+
+### Data Cleaning
+We first isolated columns we would need for our analysis and predictive modeling. We also only kept relevant rows to answering our question
+
+
+Below is the head of our dataframe `league`:
+
 | league   | position   | champion   |   kills |   doublekills |   total damage dealt |     dtpm | first blood kill   |   wards placed |   exp at 10 |   towers | result   |
 |:---------|:-----------|:-----------|--------:|--------------:|---------------------:|---------:|:-------------------|---------------:|------------:|---------:|:---------|
 | LCKC     | top        | Renekton   |       2 |             0 |                15768 | 1072.4   | False              |              8 |        4909 |      nan | False    |
@@ -40,17 +53,13 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 | LCKC     | adc        | Samira     |       2 |             0 |                11106 |  463.853 | False              |             12 |        3103 |      nan | False    |
 | LCKC     | sup        | Leona      |       1 |             0 |                 3663 |  475.026 | True               |             29 |        2161 |      nan | False    |
 
-
----
-
-## Cleaning and Exploratory Data Analysis
-
-### Data Cleaning
-We first filtered out the columns we needed 
+As our analysis is only interested in the positions mid and adc, we decided to create a subdataframe of the original `league` dataframe, `mid_adc`:
 
 ### Univariate Analysis
+Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
 
 ### Bivariate Analysis
+Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
 
 ### Interesting Aggregates
 This table shows the mean statistics for ADC and mid players in dataset based on the result of the game (where False means that they lost, and True means that they won). Finding the means of these columns allows us to see which role carries more often.
@@ -66,25 +75,30 @@ This table shows the mean statistics for ADC and mid players in dataset based on
 ---
 
 ## Assessment of Missingness
-We believe that the column `dtpm` is NMAR. 
-Here's what a Markdown table looks like. Note that the code for this table was generated _automatically_ from a DataFrame, using
+State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 
-```py
-print(counts[['Quarter', 'Count']].head().to_markdown(index=False))
-```
-
-| Quarter     |   Count |
-|:------------|--------:|
-| Fall 2020   |       3 |
-| Winter 2021 |       2 |
-| Spring 2021 |       6 |
-| Summer 2021 |       4 |
-| Fall 2021   |      55 |
+Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
+• The distribution of column 
+Y
+ when column 
+X
+ is missing and the distribution of column 
+Y
+ when column 
+X
+ is not missing, as was done in Lecture 8.
+• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
 ---
 
 ## Hypothesis Testing
+Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
+p
+-value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer.
 
+Optional: Embed a visualization related to your hypothesis test in your website.
+
+Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.
 
 ---
 
@@ -95,22 +109,27 @@ To evaluate our model, we chose precision. As we are predicting categorical vari
 
 ---
 
-## Framing a Prediction Problem
-
-
----
-
 ## Baseline Model
+Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.
 
+Tip: Make sure to hit all of the points above: many projects in the past have lost points for not doing so.
 
 ---
 
 ## Final Model
+State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
 
+Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
+
+Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
 
 ---
 
 ## Fairness Analysis
+Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
+p
+-value, and your conclusion.
 
+Optional: Embed a visualization related to your permutation test in your website.
 
 ---
