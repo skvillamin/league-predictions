@@ -56,10 +56,10 @@ Below is the head of our dataframe `league`:
 As our analysis is only interested in the positions mid and adc, we decided to create a subdataframe of the original `league` dataframe, `mid_adc`:
 
 ### Univariate Analysis
-Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+Our plot shows the distribution of kills for ADC versus mid players. Here we see that both graphs follow a similar curve, but more mid players on average have 5 kills in a game, but more ADC players have more than 5 kills in a game.
 
 ### Bivariate Analysis
-Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+This plot shows the distribution of a player getting first blood kill, given their position is mid or ADC. First Blood Kill is defined as the first kill a team scores within a match, giving a great early advantage to the successful team.
 
 ### Interesting Aggregates
 This table shows the mean statistics for ADC and mid players in dataset based on the result of the game (where False means that they lost, and True means that they won). Finding the means of these columns allows us to see which role carries more often.
