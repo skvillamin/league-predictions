@@ -1,6 +1,6 @@
 # The Battle for Carry: An Analysis of ADC vs Mid Players and Post-Game Role Predictive Model
 
-by Katelyn Villamin (svillamin@ucsd.edu) & Nanch Shen (nshen@ucsd.edu)
+by Katelyn Villamin (svillamin@ucsd.edu) & Nancy Shen (nshen@ucsd.edu)
 
 This is a project for DSC80 at the University of California, San Diego. We performed Data Cleaning and Exploratory Data Analysis, Assessments for Missingness, Hypothesis Testing, and Predictive Model. This website stands as a report of our findings.
 
