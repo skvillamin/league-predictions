@@ -1,1 +1,3 @@
-gem "github-pages", group: :jekyll_plugins
+source 'https://rubygems.org'
+gem 'jekyll', '~> 4.2'
+gem 'minima'
