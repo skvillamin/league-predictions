@@ -282,7 +282,6 @@ We think that while this current model is not good as it fell short in a couple 
 ---
 
 ## Final Model
-*State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process. Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance. Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.*
 
 To improve upon our baseline moel,  we decided to add a few more features that were a greater indicator on certain roles: `wards placed`, `monster kills`, `dtpm`, and `exp at 10`. Below are the indicators for each position:
 
@@ -310,7 +309,6 @@ Our model performed with a precision score of:
 ---
 
 ## Fairness Analysis
-*Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion. Optional: Embed a visualization related to your permutation test in your website.*
 
 To test for fairness, we chose to perform a permutation test on two individual groups we defined below:
 - carries: positions with more than 3 kills
