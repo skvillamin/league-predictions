@@ -308,7 +308,8 @@ We believe that these added features improved the model's performance significan
 
 As we were performing a multiclass classification which was not linear, we decided on using `RandomForest Classifier` instead of `LogisticRegression`. Here, it performed faster than `LogisticRegression` with a better prediction score. To select the best hyperparameters for our modeling algorithm, we decided to tune `max-depth` and `criterion`. Having no maximum depth of trees may lead to worse results. On the other hand, choosing the criterion, we face a trade off between using Gini vs. Entropy, with the expenses of computation and results. To find this, we used `GridSearchCV` and found that a max depth of 2 and using gini would give us the best overall results.
 
-Our model performed with a precision score of: 
+Our model performed with a precision score of: 0.827605728060049
+Although we have a lower precision score than our baseline model, we didn't perform k-fold cross-validation in the baseline model, making this model much more accurate in predicting the game statistics for unseen data as well.
 
 ---
 
@@ -328,9 +329,9 @@ Similar to our reasons in Framing the Prediction Problem, We chose precision as 
 
 We chose difference in precision as our test statistic as we are trying to find the difference in distribution between carries vs non carries.
 
-Observed: -0.009959146629159088
+Observed: 0.008637456828959111
 
-P-Value: 1.0
+P-Value: 0.064
 
 Conclusion: We reject the null at 5% significance level. Our model is unfair and does not achieve precision parity.
 
