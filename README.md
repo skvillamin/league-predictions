@@ -173,6 +173,7 @@ MAR Pivoted Table:
 | VL         |             0.0113533   |             0.0134962   |
 | WLDs       |             0.00836993  |             0.0113289   |
 
+
 <iframe
   src="assets/mar.html"
   width="800"
@@ -180,7 +181,11 @@ MAR Pivoted Table:
   frameborder="0"
 ></iframe>
 
-MCAR Pivoted Table:
+Observed Statistic: 0.0030311228214282494
+P-Value: 1.0
+Conclusion: We reject the null at 5% significance. **Missingness of `doublekills` does depend on `towers`. (Missing Completely at Random)**
+
+Towers vs Double Kills:
 
 |   towers |   double_missing = False |   double_missing = True |
 |---------:|-------------------------:|------------------------:|
@@ -197,12 +202,17 @@ MCAR Pivoted Table:
 |       10 |                0.124415  |               0.127543  |
 |       11 |                0.105679  |               0.0882353 |
 
+
 <iframe
   src="assets/mcar.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+Observed Statistic: 0.03472890994914897
+P-Value: 0.0195
+Conclusion: We fail to reject the null at 5% significance. **Missingness of `doublekills` does not depend on `towers`. (Missing Completely at Random)**
 
 ---
 
