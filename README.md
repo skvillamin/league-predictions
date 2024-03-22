@@ -26,6 +26,7 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 | `'doublekills'` | Total number of times a player kills an two opponents consecutively |
 | `'total damage dealt'` | Total damage dealt to enemy champions by player|
 | `'dtpm'` | Average damage taken from enemy champions per minute by player|
+| `'dmpm'` | Average damage mitigated from enemy champions per minute by player|
 | `'first blood kill'` | Whether the player got the first kill |
 | `'wards placed'` | The number of wards placed by player|
 | `'towers'` | The total number of towers taken by a team|
@@ -40,10 +41,22 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 ## Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning
-We first isolated columns we would need for our analysis and predictive modeling. We also only kept relevant rows to answering our question
+We first isolated columns we would need for our analysis and predictive modeling, keeping only relevant rows. Since we noticed that some of the 2022 data had overlaps to 2023, we filtered out for 2022 only before dropping the `year` column as it was not relevant to our question or predictive model. 
 
+For clarity, we decided changed all the `position` values of 'bot' with 'adc'. We also decided to rename the columns for more appropriate labels:
+```py league.rename(columns={
+    "damagetochampions": "total damage dealt", 
+    "firstbloodkill": "first blood kill",
+    'wardsplaced': 'wards placed', 
+    'monsterkills': 'monster kills', 
+    'damagetakenperminute': 'dtpm',
+    'damagemitigatedperminute': 'dmpm',
+    'xpat10' : 'exp at 10'
+    }, inplace=True)
+```
+Finally we changed the values of `result` and `first blood kill` into boolean values.
 
-Below is the head of our dataframe `league`:
+Below is the head of our DataFrame `league`. We used this dataframe for our **predictive model**:
 
 | league   | position   | champion   |   kills |   doublekills |   total damage dealt |     dtpm | first blood kill   |   wards placed |   exp at 10 |   towers | result   |
 |:---------|:-----------|:-----------|--------:|--------------:|---------------------:|---------:|:-------------------|---------------:|------------:|---------:|:---------|
@@ -53,7 +66,20 @@ Below is the head of our dataframe `league`:
 | LCKC     | adc        | Samira     |       2 |             0 |                11106 |  463.853 | False              |             12 |        3103 |      nan | False    |
 | LCKC     | sup        | Leona      |       1 |             0 |                 3663 |  475.026 | True               |             29 |        2161 |      nan | False    |
 
-As our analysis is only interested in the positions mid and adc, we decided to create a subdataframe of the original `league` dataframe, `mid_adc`:
+As our analysis is only interested in the positions mid and adc, we decided to create a subdataframe of the original `league` dataframe called `mid_adc` for our **analysis**. We filtered the `position` to only include rows where the position is "mid" or "adc". 
+
+Below is the head of our DataFrame `mid_adc`:
+
+| league   | position   |   kills |   doublekills |   total damage dealt | first blood kill   |   towers | result   |
+|:---------|:-----------|--------:|--------------:|---------------------:|:-------------------|---------:|:---------|
+| LCKC     | mid        |       2 |             0 |                14258 | False              |      nan | False    |
+| LCKC     | adc        |       2 |             0 |                11106 | False              |      nan | False    |
+| LCKC     | mid        |       6 |             2 |                20690 | False              |      nan | True     |
+| LCKC     | adc        |       8 |             3 |                26687 | False              |      nan | True     |
+| LCKC     | mid        |       2 |             0 |                23082 | False              |      nan | False    |
+
+
+
 
 ### Univariate Analysis
 Our plot shows the distribution of kills for ADC versus mid players. Here we see that both graphs follow a similar curve, but more mid players on average have 5 kills in a game, but more ADC players have more than 5 kills in a game.
@@ -90,6 +116,8 @@ This table shows the mean statistics for ADC and mid players in dataset based on
 
 ## Assessment of Missingness
 State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
+
+When cleaning the columns in our dataset, we noticed that our column `
 
 Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
 • The distribution of column 
