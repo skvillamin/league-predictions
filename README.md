@@ -232,7 +232,7 @@ Null Hypothesis (H0): The distribution of games won where ADC players had more d
 
 Alternative Hypothesis (H1): The distribution of games won where ADC players had more damage on average than mid players is not equal to the distribution of games won where mid players had more damage than ADC players
 
-Since we are looking at two samples from the same population, we decided to conduct a permutation test at 5% significance level. We chose to test this through *difference in group means* as both distributions have the same center and similar shapes.
+Since we are looking at two samples from the same population, we decided to conduct a permutation test at 5% significance level as it is typically a standard metric for testing. We chose to test this through *difference in group means* as both distributions have the same center and similar shapes.
 
 Observed Difference: 545.821638930971
 
