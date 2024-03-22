@@ -58,8 +58,22 @@ As our analysis is only interested in the positions mid and adc, we decided to c
 ### Univariate Analysis
 Our plot shows the distribution of kills for ADC versus mid players. Here we see that both graphs follow a similar curve, but more mid players on average have 5 kills in a game, but more ADC players have more than 5 kills in a game.
 
+<iframe
+  src="assets/univariate.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Bivariate Analysis
 This plot shows the distribution of a player getting first blood kill, given their position is mid or ADC. First Blood Kill is defined as the first kill a team scores within a match, giving a great early advantage to the successful team.
+
+<iframe
+  src="assets/bivariate.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Aggregates
 This table shows the mean statistics for ADC and mid players in dataset based on the result of the game (where False means that they lost, and True means that they won). Finding the means of these columns allows us to see which role carries more often.
