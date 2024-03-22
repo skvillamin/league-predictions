@@ -28,6 +28,7 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 | `'dtpm'` | Average damage taken from enemy champions per minute by player|
 | `'dmpm'` | Average damage mitigated from enemy champions per minute by player|
 | `'first blood kill'` | Whether the player got the first kill |
+| `'monster kills'` | The number of monsters a player killed in a game |
 | `'wards placed'` | The number of wards placed by player|
 | `'towers'` | The total number of towers taken by a team|
 | `'exp at 10'` | The experience level gained by a player at minute-10|
@@ -60,25 +61,26 @@ Finally we changed the values of `result` and `first blood kill` into boolean va
 
 Below is the head of our DataFrame `league`. We used this dataframe for our **predictive model**:
 
-| league   | position   | champion   |   kills |   doublekills |   total damage dealt |     dtpm | first blood kill   |   wards placed |   exp at 10 |   towers | result   |
-|:---------|:-----------|:-----------|--------:|--------------:|---------------------:|---------:|:-------------------|---------------:|------------:|---------:|:---------|
-| LCKC     | top        | Renekton   |       2 |             0 |                15768 | 1072.4   | False              |              8 |        4909 |      nan | False    |
-| LCKC     | jng        | Xin Zhao   |       2 |             0 |                11765 |  944.273 | False              |              6 |        3484 |      nan | False    |
-| LCKC     | mid        | LeBlanc    |       2 |             0 |                14258 |  581.646 | False              |             19 |        4556 |      nan | False    |
-| LCKC     | adc        | Samira     |       2 |             0 |                11106 |  463.853 | False              |             12 |        3103 |      nan | False    |
-| LCKC     | sup        | Leona      |       1 |             0 |                 3663 |  475.026 | True               |             29 |        2161 |      nan | False    |
+| league   | position   | champion   |   kills |   doublekills |   total damage dealt |     dtpm |    dmpm | first blood kill   |   monster kills |   wards placed |   exp at 10 |   towers | result   |
+|:---------|:-----------|:-----------|--------:|--------------:|---------------------:|---------:|--------:|:-------------------|----------------:|---------------:|------------:|---------:|:---------|
+| LCKC     | top        | Renekton   |       2 |             0 |                15768 | 1072.4   | 777.793 | False              |              11 |              8 |        4909 |      nan | False    |
+| LCKC     | jng        | Xin Zhao   |       2 |             0 |                11765 |  944.273 | 650.158 | False              |             115 |              6 |        3484 |      nan | False    |
+| LCKC     | mid        | LeBlanc    |       2 |             0 |                14258 |  581.646 | 227.776 | False              |              16 |             19 |        4556 |      nan | False    |
+| LCKC     | adc        | Samira     |       2 |             0 |                11106 |  463.853 | 218.879 | False              |              18 |             12 |        3103 |      nan | False    |
+| LCKC     | sup        | Leona      |       1 |             0 |                 3663 |  475.026 | 490.123 | True               |               0 |             29 |        2161 |      nan | False    |
 
 As our analysis is only interested in the positions mid and adc, we decided to create a subdataframe of the original `league` dataframe called `mid_adc` for our **analysis**. We filtered the `position` to only include rows where the position is "mid" or "adc". 
 
 Below is the head of our DataFrame `mid_adc`:
 
-| league   | position   |   kills |   doublekills |   total damage dealt | first blood kill   |   towers | result   |
-|:---------|:-----------|--------:|--------------:|---------------------:|:-------------------|---------:|:---------|
-| LCKC     | mid        |       2 |             0 |                14258 | False              |      nan | False    |
-| LCKC     | adc        |       2 |             0 |                11106 | False              |      nan | False    |
-| LCKC     | mid        |       6 |             2 |                20690 | False              |      nan | True     |
-| LCKC     | adc        |       8 |             3 |                26687 | False              |      nan | True     |
-| LCKC     | mid        |       2 |             0 |                23082 | False              |      nan | False    |
+| league   | position   |   kills |   doublekills |   total damage dealt |    dtpm |    dmpm | first blood kill   |   towers | result   |
+|:---------|:-----------|--------:|--------------:|---------------------:|--------:|--------:|:-------------------|---------:|:---------|
+| LCKC     | mid        |       2 |             0 |                14258 | 581.646 | 227.776 | False              |      nan | False    |
+| LCKC     | adc        |       2 |             0 |                11106 | 463.853 | 218.879 | False              |      nan | False    |
+| LCKC     | mid        |       6 |             2 |                20690 | 531.629 | 426.935 | False              |      nan | True     |
+| LCKC     | adc        |       8 |             3 |                26687 | 385.009 | 186.655 | False              |      nan | True     |
+| LCKC     | mid        |       2 |             0 |                23082 | 395.449 | 366.698 | False              |      nan | False    |
+
 
 
 
@@ -106,20 +108,25 @@ This plot shows the distribution of a player getting first blood kill, given the
 ### Interesting Aggregates
 This table shows the mean statistics for ADC and mid players in dataset based on the result of the game (where False means that they lost, and True means that they won). Finding the means of these columns allows us to see which role carries more often.
 
-|   year |   kills |   deaths |   assists |   doublekills |   total damage dealt |     dpm |   total gold earned |     gpm |   first blood kill |   dragons |
-|-------:|--------:|---------:|----------:|--------------:|---------------------:|--------:|--------------------:|--------:|-------------------:|----------:|
-|   2022 | 2.57627 |  3.50684 |   3.38512 |      0.27522  |              15940.8 | 488.548 |             8264.87 | 257.337 |          0.0904797 |       nan |
-|   2022 | 5.93634 |  1.57621 |   7.33759 |      1.04109  |              20146.4 | 631.253 |            10769.4  | 342.727 |          0.142976  |       nan |
-|   2022 | 2.24774 |  3.60916 |   3.65134 |      0.181854 |              15630.7 | 483.95  |             7407.34 | 231.989 |          0.0707598 |       nan |
-|   2022 | 4.73999 |  1.68678 |   8.12532 |      0.644739 |              19188.5 | 603.827 |             9504.98 | 302.957 |          0.106589  |       nan |
+|   kills |   doublekills |   total damage dealt |    dtpm |    dmpm |   first blood kill |
+|--------:|--------------:|---------------------:|--------:|--------:|-------------------:|
+| 2.57627 |      0.27522  |              15940.8 | 451.842 | 284.466 |          0.0904797 |
+| 5.93634 |      1.04109  |              20146.4 | 390.162 | 277.94  |          0.142976  |
+| 2.24774 |      0.181854 |              15630.7 | 552.9   | 372.75  |          0.0707598 |
+| 4.73999 |      0.644739 |              19188.5 | 491.346 | 367.038 |          0.106589  |
+
+
+
 
 
 ---
 
 ## Assessment of Missingness
-*State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”*
 
-*Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include: The distribution of column  Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8. The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.*
+### NMAR Analysis
+Yes, there are a lot of columns in our dataset that is Not Missing at Random (NMAR) due to the data collection. Specifically for the ones relevant to our question, we saw that `dmpm` (Damage Mitigated per Minute) may be NMAR. For this data, only certain leagues tracked data on the damage mitigated per minute, while others did. To make this column Missing at Random (MAR) dependent, we may need to obtain `total damage mitigated`, making it possible for us to compute the `dmpm`.  As such, we speculate that it is NMAR dependent on  the `league` column.
+
+### Missingness Dependency
 
 Here, We wanted to determine if `league` and `doublekills` were Missing at Random or Missing Completely at Random.
 
@@ -226,7 +233,6 @@ Conclusion: We fail to reject the null at 5% significance. **Missingness of `dou
 ---
 
 ## Hypothesis Testing
-*Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer. Optional: Embed a visualization related to your hypothesis test in your website.Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.*
 
 Null Hypothesis (H0): The distribution of games won where ADC players had more damage on average than mid players is equal to the distribution of games won where mid players had more damage than ADC players
 
@@ -252,25 +258,86 @@ Conclusion: We reject the null at 5% significance level.
 ---
 
 ## Framing a Prediction Problem
-*Our prediction problem is: Given a dataset of post-game stats, we want to predict which role did they play. To predict the response variable (position), we will be using a multiclass classification. We chose the position as the response variable because there are clear defined criterias for post game statistics for us to draw our model from.*
+Our prediction problem is: *Given a dataset of post-game stats, we want to predict which role did they play.* To predict the response variable (`position`), we will be using a *multiclass classification.* We chose the position as the response variable because there are clear defined criterias for post game statistics for us to draw our model from.
 
-To evaluate our model, we chose precision. As we are predicting categorical variables using `RandomForestClassifier`, we cannot use accuracy or F1-score. Furthermore, weighing the trade-off between recall and precision, we believe that it is better to have a 
+To evaluate our model, we chose precision. As we are predicting non-binary classification using `RandomForestClassifier`, we cannot use accuracy or F1-score. We believe precision is a better metric 
 
 ---
 
 ## Baseline Model
-*Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.*
 
-*Tip: Make sure to hit all of the points above: many projects in the past have lost points for not doing so.*
+For our baseline model, we first took the `league` DataFrame and narrowed it down to only rows where `position` was not `team`. We decided to narrow our focus only to two features: `champion` (nominal) and `kills` (quantitative). As `champion` has no inherent ordering, we decided to use `OneHotEncoder` to turn it into quantitative columns. One-Hot Encoding the champion allows the model to capture the association between certain champions and their corresponding roles. Finally, we tried using `LogisticRegression(multi_class= 'multinomial')` to predict `position`. 
+
+Our model performed with a precision score of: 0.0.9334108441113438
+We think that while this current model is not good as it fell short in a couple of points:
+
+- It relied on too few features and found difficulty in finding the difference between "mid" and "ADC" players, positions in which they often had interchangeable champions and similar number of kills.
+
+- While LogisticRegression() had a high accuracy, it was way slower than it needed to be.
+
+- Finally, as we had not done a k-fold validation, the data seemed almost too precise, being only trained for the seen data. 
+
+
 
 ---
 
 ## Final Model
 *State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process. Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance. Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.*
 
+To improve upon our baseline moel,  we decided to add a few more features that were a greater indicator on certain roles: `wards placed`, `monster kills`, `dtpm`, and `exp at 10`. Below are the indicators for each position:
+
+| `position` | Description|
+| --- | --- |
+| adc | ADC players often have high total damage dealt, high number of kills, but low number of exp at 10, as they share it with the support. |
+| mid | Mid players often have high total damage dealt, high number of kills, and high number of exp at 10.|
+| top | Top, being the defensive hero, often have the highest dtpm. |
+| jng | Junglers often have the highest number of monster kills. |
+| sup | Supports often have low total damage dealt, low dtpm, and the highest number of wards placed. |
+
+We believe that these added features improved the model's performance significantly because:
+
+
+- Binarization of 'Monster Kills': Binarizing this feature can help distinguish between players who primarily jungle in camps versus those who focus on other aspects of the game, aiding in position prediction.
+
+- Transformation of 'Wards Placed' by finding Max Wards Placed: This function transformer used a custom function `max_of_five` which finds the players with the most number of wards placed for each team, with the player at max being (1) and else (0) This allows the model to identify the support players who fulfill these roles based on their warding behavior. 
+
+- Discretizing Exp at 10: By discretizing experience at 10 minutes into bins, the model can capture role-specific patterns in player progression and identify players who exhibit behavior consistent with certain roles. This allows us to differentiate between ADC and mid, who are very similar in statistics, as ADCs lane with a support, while mid players gain solo-experience. 
+
+As we were performing a multiclass classification which was not linear, we decided on using `RandomForest Classifier` instead of `LogisticRegression`. Here, it performed faster than `LogisticRegression` with a better prediction score. To select the best hyperparameters for our modeling algorithm, we decided to tune `max-depth` and `criterion`. Having no maximum depth of trees may lead to worse results. On the other hand, choosing the criterion, we face a trade off between using Gini vs. Entropy, with the expenses of computation and results. To find this, we used `GridSearchCV` and found that a max depth of 2 and using gini would give us the best overall results.
+
+Our model performed with a precision score of: 
+
 ---
 
 ## Fairness Analysis
 *Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion. Optional: Embed a visualization related to your permutation test in your website.*
+
+To test for fairness, we chose to perform a permutation test on two individual groups we defined below:
+- carries: positions with more than 3 kills
+- non-carries: positions with less than 3 kills
+
+We chose 3 as our threshold as that is the mean number of kills a player gets in a game. From here, we created a new binary column which sorts the rows based on whether they are considered a carry vs. a non-carry. 
+
+Null Hypothesis (H0): Our model is fair. Its precision for carries and non-carries are roughly the same, and any differences are due to random chance.
+
+Alternative Hypothesis (H1): Our model is unfair. Its precision for carries is lower than its precision for non-carries.
+
+Similar to our reasons in Framing the Prediction Problem, We chose precision as our evaluatoin metric. We are predicting non-binary classification using `RandomForestClassifier`, we cannot use accuracy or F1-score. We believe precision is a better metric Furthermore, weighing the trade-off between recall and precision, we believe that having a non-carry labeled as a carry (False Positive) is worse than having a carry labeled as a non-carry (False Negative).
+
+We chose difference in precision as our test statistic as we are trying to find the difference in distribution between carries vs non carries.
+
+Observed: -0.009959146629159088
+
+P-Value: 1.0
+
+Conclusion: We reject the null at 5% significance level. Our model is unfair and does not achieve precision parity.
+
+<iframe
+  src="assets/fairness.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 
 ---
