@@ -13,7 +13,7 @@ Our dataset is on the game statistics of 2022 professional League of Legends gam
 
 Although every role plays an integral part in a game's success, the overall deciding factor is the ability of the high-damage output heroes to out-damage the opponents. With differing opinions on the star of the team, fellow League of Legends players may be interested in putting a conclusion to this community debate. 
 
-The columns that help us answer, **"Which role carries more often: Mid or ADC?"** are: `position`, `kills`, `total damage dealt`, `result`, and `first blood kill`. As doing as much damage is important for these roles, these columns showed us: Based on the game result, who ended up doing the most amount of damage. After cleaning the data, we narrowed it to 12 columns and 144804 rows that will be needed for both our analysis and predictive modeling.
+The columns that help us answer, **"Which role carries more often: Mid or ADC?"** are: `position`, `kills`, `total damage dealt`, `result`, and `first blood kill`. As doing as much damage is important for these roles, these columns showed us: Based on the game result, who ended up doing the most amount of damage. After cleaning the data, we narrowed it to 12 columns and 144804 rows for our analysis' DataFrame `league` and 8 columns and 48268 rows for our predictive model's DataFrame `mid_adc`, a subDataFrame of `league`.
 
 ### Analysis Column Descriptions
 
