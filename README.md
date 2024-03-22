@@ -119,7 +119,9 @@ This table shows the mean statistics for ADC and mid players in dataset based on
 
 *Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include: The distribution of column  Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8. The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.*
 
-MAR Pivoted Table:
+Here, We wanted to determine if `league` and `doublekills` were Missing at Random or Missing Completely at Random.
+
+Here is the observed distribution when `doublekills` is missing and not missing:
 
 | league     |   double_missing = True |   double_missing= False |
 |:-----------|------------------------:|------------------------:|
@@ -185,7 +187,9 @@ Observed Statistic: 0.0030311228214282494
 P-Value: 1.0
 Conclusion: We reject the null at 5% significance. **Missingness of `doublekills` does depend on `towers`. (Missing Completely at Random)**
 
-Towers vs Double Kills:
+Here, We wanted to determine if `towers` and `doublekills` were Missing at Random or Missing Completely at Random.
+
+Here is the observed distribution when `doublekills` is missing and not missing:
 
 |   towers |   double_missing = False |   double_missing = True |
 |---------:|-------------------------:|------------------------:|
@@ -225,7 +229,16 @@ Alternative Hypothesis (H1): The distribution of games won where ADC players had
 
 Since we are looking at two samples from the same population, we decided to conduct a permutation test at 5% significance level. We chose to test this through *difference in group means* as both distributions have the same center and similar shapes.
 
+<iframe
+  src="assets/hypotest.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
+Observed Difference: 545.821638930971
+P-Value: 0.0006
+Conclusion: We reject the null at 5% significance level.
 
 ---
 
