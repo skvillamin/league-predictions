@@ -44,6 +44,7 @@ The columns that help us answer, **"Which role carries more often: Mid or ADC?"*
 We first isolated columns we would need for our analysis and predictive modeling, keeping only relevant rows. Since we noticed that some of the 2022 data had overlaps to 2023, we filtered out for 2022 only before dropping the `year` column as it was not relevant to our question or predictive model. 
 
 For clarity, we decided changed all the `position` values of 'bot' with 'adc'. We also decided to rename the columns for more appropriate labels:
+
 ```py league.rename(columns={
     "damagetochampions": "total damage dealt", 
     "firstbloodkill": "first blood kill",
@@ -54,6 +55,7 @@ For clarity, we decided changed all the `position` values of 'bot' with 'adc'. W
     'xpat10' : 'exp at 10'
     }, inplace=True)
 ```
+
 Finally we changed the values of `result` and `first blood kill` into boolean values.
 
 Below is the head of our DataFrame `league`. We used this dataframe for our **predictive model**:
@@ -206,6 +208,11 @@ Here is the observed distribution when `doublekills` is missing and not missing:
 |       10 |                0.124415  |               0.127543  |
 |       11 |                0.105679  |               0.0882353 |
 
+Observed Statistic: 0.03472890994914897
+
+P-Value: 0.0195
+
+Conclusion: We fail to reject the null at 5% significance. **Missingness of `doublekills` does not depend on `towers`. (Missing Completely at Random)**
 
 <iframe
   src="assets/mcar.html"
@@ -214,9 +221,7 @@ Here is the observed distribution when `doublekills` is missing and not missing:
   frameborder="0"
 ></iframe>
 
-Observed Statistic: 0.03472890994914897
-P-Value: 0.0195
-Conclusion: We fail to reject the null at 5% significance. **Missingness of `doublekills` does not depend on `towers`. (Missing Completely at Random)**
+
 
 ---
 
@@ -229,6 +234,12 @@ Alternative Hypothesis (H1): The distribution of games won where ADC players had
 
 Since we are looking at two samples from the same population, we decided to conduct a permutation test at 5% significance level. We chose to test this through *difference in group means* as both distributions have the same center and similar shapes.
 
+Observed Difference: 545.821638930971
+
+P-Value: 0.0006
+
+Conclusion: We reject the null at 5% significance level.  
+
 <iframe
   src="assets/hypotest.html"
   width="800"
@@ -236,9 +247,7 @@ Since we are looking at two samples from the same population, we decided to cond
   frameborder="0"
 ></iframe>
 
-Observed Difference: 545.821638930971
-P-Value: 0.0006
-Conclusion: We reject the null at 5% significance level.
+
 
 ---
 
