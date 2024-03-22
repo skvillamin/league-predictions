@@ -219,6 +219,14 @@ Conclusion: We fail to reject the null at 5% significance. **Missingness of `dou
 ## Hypothesis Testing
 *Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer. Optional: Embed a visualization related to your hypothesis test in your website.Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.*
 
+Null Hypothesis (H0): The distribution of games won where ADC players had more damage on average than mid players is equal to the distribution of games won where mid players had more damage than ADC players
+
+Alternative Hypothesis (H1): The distribution of games won where ADC players had more damage on average than mid players is not equal to the distribution of games won where mid players had more damage than ADC players
+
+Since we are looking at two samples from the same population, we decided to conduct a permutation test at 5% significance level. We chose to test this through *difference in group means* as both distributions have the same center and similar shapes.
+
+
+
 ---
 
 ## Framing a Prediction Problem
