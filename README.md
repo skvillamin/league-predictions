@@ -194,9 +194,9 @@ Here is the observed distribution when `doublekills` is missing and not missing:
   frameborder="0"
 ></iframe>
 
-Observed Statistic: 0.0030311228214282494
-P-Value: 1.0
-Conclusion: We reject the null at 5% significance. **Missingness of `doublekills` does depend on `towers`. (Missing Completely at Random)**
+Observed Statistic: 0.4961517317207257
+P-Value: 0.0
+Conclusion: We reject the null at 5% significance. **Missingness of `doublekills` does depend on `league`. (Missing Completely at Random)**
 
 Here, We wanted to determine if `towers` and `doublekills` were Missing at Random or Missing Completely at Random.
 
@@ -221,7 +221,7 @@ Here is the observed distribution when `doublekills` is missing and not missing:
 
 Observed Statistic: 0.03472890994914897
 
-P-Value: 0.0195
+P-Value: 0.0213
 
 Conclusion: We fail to reject the null at 5% significance. **Missingness of `doublekills` does not depend on `towers`. (Missing Completely at Random)**
 
