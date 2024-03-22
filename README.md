@@ -119,6 +119,91 @@ This table shows the mean statistics for ADC and mid players in dataset based on
 
 *Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include: The distribution of column  Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8. The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.*
 
+MAR Pivoted Table:
+
+| league     |   double_missing = True |   double_missing= False |
+|:-----------|------------------------:|------------------------:|
+| CBLOL      |             0.0162841   |             0.0193577   |
+| CBLOLA     |             0.0152275   |             0.0181017   |
+| CDF        |             0.00673324  |             0.00800414  |
+| CT         |             0.00188531  |             0.00224116  |
+| DCup       |             0           |             0.0055167   |
+| DDH        |             0.0158283   |             0.0188159   |
+| EBL        |             0.012472    |             0.0148261   |
+| EL         |             0.00950941  |             0.0113043   |
+| ESLOL      |             0.0154347   |             0.0183479   |
+| EUM        |             0.0181694   |             0.0215989   |
+| GL         |             0.0121613   |             0.0144567   |
+| GLL        |             0.014088    |             0.0167471   |
+| HC         |             0.0126378   |             0.0150232   |
+| HM         |             0.0109182   |             0.012979    |
+| IC         |             0.00540731  |             0.00642794  |
+| LAS        |             0.0184594   |             0.0219437   |
+| LCK        |             0.0255656   |             0.0303911   |
+| LCKC       |             0.0280517   |             0.0333465   |
+| LCL        |             0.000745836 |             0.000886612 |
+| LCO        |             0.0151239   |             0.0179785   |
+| LCS        |             0.0158076   |             0.0187913   |
+| LCSA       |             0.0348264   |             0.0413999   |
+| LDL        |             0           |             0.0730716   |
+| LEC        |             0.0146681   |             0.0174367   |
+| LFL        |             0.0139015   |             0.0165255   |
+| LFL2       |             0.0156626   |             0.0186189   |
+| LHE        |             0.016367    |             0.0194562   |
+| LJL        |             0.0134872   |             0.0160329   |
+| LJLA       |             0.0028176   |             0.00334942  |
+| LLA        |             0.0113533   |             0.0134962   |
+| LMF        |             0.0199511   |             0.0237169   |
+| LPL        |             0           |             0.0665698   |
+| LPLOL      |             0.0145024   |             0.0172397   |
+| LVP SL     |             0.0139844   |             0.016624    |
+| MSI        |             0.00505511  |             0.00600926  |
+| NEXO       |             0.00789343  |             0.00938331  |
+| NLC        |             0.0268915   |             0.0319673   |
+| PCS        |             0.0184802   |             0.0219683   |
+| PGC        |             0.0456203   |             0.0542311   |
+| PGN        |             0.00878429  |             0.0104423   |
+| PRM        |             0.0259592   |             0.030859    |
+| SL (LATAM) |             0.0118919   |             0.0141365   |
+| TAL        |             0.0143366   |             0.0170427   |
+| TCL        |             0.0152275   |             0.0181017   |
+| UL         |             0.015186    |             0.0180524   |
+| UPL        |             0.0375404   |             0.0446261   |
+| VCS        |             0.0233281   |             0.0277313   |
+| VL         |             0.0113533   |             0.0134962   |
+| WLDs       |             0.00836993  |             0.0113289   |
+
+<iframe
+  src="assets/mar.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+MCAR Pivoted Table:
+
+|   towers |   double_missing = False |   double_missing = True |
+|---------:|-------------------------:|------------------------:|
+|        0 |                0.0470336 |               0.0439802 |
+|        1 |                0.0824551 |               0.0852117 |
+|        2 |                0.111729  |               0.114349  |
+|        3 |                0.108655  |               0.117372  |
+|        4 |                0.0631343 |               0.0629467 |
+|        5 |                0.0373731 |               0.0351842 |
+|        6 |                0.0281518 |               0.0241891 |
+|        7 |                0.0617681 |               0.0538758 |
+|        8 |                0.0912861 |               0.0940077 |
+|        9 |                0.13832   |               0.153106  |
+|       10 |                0.124415  |               0.127543  |
+|       11 |                0.105679  |               0.0882353 |
+
+<iframe
+  src="assets/mcar.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ---
 
 ## Hypothesis Testing
